@@ -8,19 +8,26 @@ import {
   Put,
   Res,
 } from "@nestjs/common";
+import { User } from "src/domains/user/userEntity";
 import { UserService } from "../usecases/userService";
 
 @Controller("users") // Assuming the base route is '/users'
 export class UserController {
   constructor(private userService: UserService) {}
 
+  @Get()
+  async getUsers(@Res() res) {
+    const users = await this.userService.getUsers();
+    res.send(users);
+  }
+
   @Post()
-  async createUser(@Body() body, @Res() res) {
-    if (body.name == null) {
+  async createUser(@Body() user: User, @Res() res) {
+    if (user.name == null) {
       res.status(400).send({ message: "Name is required" });
     }
-    const user = await this.userService.createUser(body.name, body.email);
-    res.status(201).send(user);
+    const resUser = await this.userService.createUser(user.name, user.email);
+    res.status(201).send(resUser);
   }
 
   @Get(":id")
@@ -34,11 +41,11 @@ export class UserController {
   }
 
   @Put(":id")
-  async updateUser(@Param("id") id, @Body() body, @Res() res) {
+  async updateUser(@Param("id") id, @Body() user: User, @Res() res) {
     const existingUser = await this.userService.getUser(id);
     if (existingUser) {
-      existingUser.name = body.name;
-      existingUser.email = body.email;
+      existingUser.name = user.name;
+      existingUser.email = user.email;
       await this.userService.updateUser(existingUser);
       res.send(existingUser);
     } else {

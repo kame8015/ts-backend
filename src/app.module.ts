@@ -22,7 +22,7 @@ import { UserService } from "./usecases/userService";
         database: configService.get<string>("DATABASE_NAME"),
         entities: [User],
         synchronize: true,
-        timezone: "Asia/Tokyo",
+        timezone: "+09:00",
       }),
       inject: [ConfigService],
     }),

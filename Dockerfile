@@ -1,5 +1,15 @@
-# Node.jsの公式イメージをベースにして使用
-FROM node:16
+FROM node:16-alpine3.15
+
+USER root
+
+RUN apk update --no-cache && apk add --update --no-cache \
+    vim \
+    zip \
+    unzip \
+    curl \
+    sudo \
+    git \
+    bash-completion
 
 # ワーキングディレクトリの設定
 WORKDIR /usr/src/app
@@ -18,3 +28,9 @@ EXPOSE 3000
 
 # 起動時のコマンドを指定
 # CMD ["yarn", "start"]
+
+# ~/.bashrcに設定を追加
+RUN echo "source /etc/bash_completion" >> ~/.bashrc
+
+# gitの設定
+RUN git config --global --add safe.directory /app

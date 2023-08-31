@@ -8,6 +8,10 @@ export class UserService {
     private readonly userRepository: UserRepositoryInterface,
   ) {}
 
+  async getUsers(): Promise<User[]> {
+    return this.userRepository.findAll();
+  }
+
   async createUser(name: string, email?: string): Promise<User> {
     const user = new User(name, email);
     await this.userRepository.save(user);

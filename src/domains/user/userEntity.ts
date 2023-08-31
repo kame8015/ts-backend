@@ -1,3 +1,4 @@
+import { IsEmail } from "class-validator";
 import {
   Column,
   CreateDateColumn,
@@ -15,6 +16,7 @@ export class User {
   @Column("varchar")
   name: string;
 
+  @IsEmail()
   @Column("varchar", { nullable: true })
   email?: string;
 
