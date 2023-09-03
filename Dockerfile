@@ -1,15 +1,17 @@
-FROM node:16-alpine3.15
+FROM node:20.5.1-slim
 
 USER root
 
-RUN apk update --no-cache && apk add --update --no-cache \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     vim \
     zip \
     unzip \
     curl \
     sudo \
     git \
-    bash-completion
+    bash-completion \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # ワーキングディレクトリの設定
 WORKDIR /usr/src/app
