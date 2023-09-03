@@ -8,5 +8,6 @@
     "source.organizeImports": true
   },
   "prettier.singleQuote": true,
-  "prettier.tabWidth": 2
+  "prettier.tabWidth": 2,
+  "debug.terminal.clearBeforeReusing": true
 }

@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json", // 通常のtsconfig.jsonをベースに拡張
+  "compilerOptions": {
+    "module": "commonjs", // テスト環境は通常CommonJSを使用
+    "jsx": "react", // Reactのテストの場合
+    "sourceMap": true, // ソースマップを有効にしてデバッグを容易にする
+    "outDir": "./out", // コンパイルされたJSファイルの出力ディレクトリ
+    "rootDir": "./", // ルートディレクトリ
+    "removeComments": true // コメントを削除
+  },
+  "include": [
+    "src/**/*.ts", // ソースコードのTSファイル
+    "src/**/*.tsx", // ソースコードのTSXファイル
+    "tests/**/*.ts" // テストのTSファイル
+  ],
+  "exclude": [
+    "node_modules" // node_modulesは除外
+  ]
+}

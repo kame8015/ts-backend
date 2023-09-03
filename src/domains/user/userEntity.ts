@@ -1,4 +1,4 @@
-import { IsEmail } from "class-validator";
+import { IsEmail, IsNotEmpty } from "class-validator";
 import {
   Column,
   CreateDateColumn,
@@ -13,6 +13,7 @@ export class User {
   @PrimaryColumn("varchar")
   id: string;
 
+  @IsNotEmpty()
   @Column("varchar")
   name: string;
 
